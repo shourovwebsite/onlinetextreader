@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function speechText() {
+                $.ajax({
+                    url: 'proxy.php',
+                    async: true,
+                    dataType: 'text',
+                    type: 'post',
+                    contentType: 'application/x-www-form-urlencoded',
+                    data: "text=" + $("#srcText").val(),
+                    success: function (data, textStatus, jQxhr) { console.log(data); $("#audioPlayer").attr("src", data); },
+                    error: function(jqXhr, textStatus, errorThrown) { console.log(errorThrown); }
+                });
+            }
+        </script>
+        <textarea id="srcText" cols="50" rows="10"></textarea><br/>
+        <input type="button" value="Speech" onclick="speechText();"/>
+        <audio id="audioPlayer" src="" autoplay="autoplay"></audio>
+    </body>
+</html>
